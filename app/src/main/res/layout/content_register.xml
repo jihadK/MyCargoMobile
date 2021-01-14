@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
+        <TextView
+            android:id="@+id/personal_info"
+            android:text="Please enter your personal info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:drawablePadding="10dp"/>
+        <EditText
+            android:id="@+id/idNumber"
+            android:layout_below="@+id/personal_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:drawablePadding="10dp"
+            android:hint="ID number"
+            android:textColorHint="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_key_green_24dp"/>
+        <EditText
+            android:id="@+id/ktp"
+            android:layout_below="@+id/idNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:hint="Nomor KTP"
+            android:textColorHint="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_card_green_24dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_below="@+id/ktp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColorHint="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_lock_outline_green_24dp"/>
+        <EditText
+            android:id="@+id/password1"
+            android:layout_below="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:inputType="textPassword"
+            android:hint="Confirm password"
+            android:textColorHint="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_lock_outline_green_24dp"/>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_below="@+id/password1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/desc_ready"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12dp"
+            android:drawableTop="@android:color/background_dark"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

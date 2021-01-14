@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "720198453279",
+    "firebase_url": "https://mycargo-d8904.firebaseio.com",
+    "project_id": "mycargo-d8904",
+    "storage_bucket": "mycargo-d8904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720198453279:android:39871dd9827e805b7f2d2a",
+        "android_client_info": {
+          "package_name": "com.example.mycargo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720198453279-acd4c1ovqo44jf2qom65ge2nuq5r1b7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNADjFoncK2JcC5Rh9rbs8PSzuOzv8zVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720198453279-acd4c1ovqo44jf2qom65ge2nuq5r1b7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

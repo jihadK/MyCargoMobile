@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My-Cargo</string>
+    <string name="title_activity_main_driver">Map</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="access_token">sk.eyJ1IjoibGV0c2xhbW9uZyIsImEiOiJjazc0Z3hkdGIwMW1kM2VwZno1dXQ0cXFkIn0.0a-Rq8ZHVI3O0vxdrHtQig</string>
+    <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <string name="error_connection">Can\'t connect to server, Please check your connection</string>
+    <string name="navigation_guidance_day" translatable="false">mapbox://styles/mapbox/navigation-guidance-day-v4</string>
+</resources>
