@@ -1,11 +1,14 @@
 package com.example.mycargo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +27,12 @@ import com.example.mycargo.util.SendAndReceiveJSON;
 import com.example.mycargo.util.Utility;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.json.simple.JSONObject;
 
@@ -57,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
+        askPermission();
 
         // Set up the login form.
         mIdNumberView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -97,6 +108,31 @@ public class LoginActivity extends AppCompatActivity {
         });
         mAuth = FirebaseAuth.getInstance();
 
+    }
+
+    private void askPermission() {
+        Dexter.withActivity(this).withPermission(
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+        ).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+                if (ActivityCompat.checkSelfPermission(getBaseContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    System.out.println("onPermissionGranted 1");
+                    return;
+                }
+                System.out.println("onPermissionGranted 2");
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+            }
+        }).check();
     }
 
     private void attemptLogin() {
