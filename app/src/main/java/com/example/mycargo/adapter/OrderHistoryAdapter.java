@@ -31,7 +31,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_item_order_list, parent, false);
+        View view = layoutInflater.inflate(R.layout.content_order_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -68,7 +68,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         System.out.println("---- finish time : " +  Utility.trim(object.get("FINISH_TIME")));
 
         holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")));
-        holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
+        holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) + " | "+Utility.trim(object.get("TYPE_VHE"))+" | "+Utility.trim(object.get("COLOUR_VHE")));
+        //holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
         holder.tCtr_no.setText(Utility.trim(object.get("VIN_NUMBER")));
         holder.tStatus.setText(status);
         holder.tDate.setText(Utility.trim(object.get("FINISH_TIME")));

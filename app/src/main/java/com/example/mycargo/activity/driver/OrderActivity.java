@@ -182,7 +182,9 @@ public class OrderActivity extends AppCompatActivity {
 //                } else {
 //                    orderType = "IMPORT";
 //                }
-                ORDER_DET[i] = Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE"));
+
+                ORDER_DET[i] = Utility.trim(object.get("MERK_VHE")) +" | "+Utility.trim(object.get("TYPE_VHE"))+" | "+Utility.trim(object.get("COLOUR_VHE"));
+                //ORDER_DET[i] = Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE"));
                 ORDER_TYPE[i] = Utility.trim(object.get("ORDER_TYPE"));
                 STATUSCD[i] = Utility.trim(object.get("STATUS"));
                 //CHECK JOB STATUS MSG

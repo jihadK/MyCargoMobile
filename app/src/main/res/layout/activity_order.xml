@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_content"
+    android:background="@color/softgrey2"
     tools:context=".activity.driver.OrderActivity">
     <LinearLayout
         android:layout_width="match_parent"

@@ -71,15 +71,17 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
     private TextView mJob_type;
     private TextView mAssign_at;
     private TextView mUser_type_from;
+    private TextView mUser_type_to;
     private TextView mUser_from;
     private TextView mUser_to;
     private Button mConfirmOrder;
     private ImageView mQrCode;
     private Button mDirection;
+    private String mPortName;
     private double mFromLatitude;
     private double mFromLongitude;
-    private double mToLatitude;
-    private double mToLongitude;
+    private double mPortLatitude;
+    private double mPortLongitude;
     private boolean mIsReqBgLocation = false; // if background location is on
 
     String[] DATE;
@@ -134,6 +136,7 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
         mJob_type = findViewById(R.id.tv_job_type);
         mAssign_at = findViewById(R.id.tv_assign_at);
         mUser_type_from = findViewById(R.id.tv_user_type_from);
+        mUser_type_to = findViewById(R.id.tv_user_type_to);
         mUser_from = findViewById(R.id.tv_user_from);
         mUser_to = findViewById(R.id.tv_user_to);
         mConfirmOrder = findViewById(R.id.btn_confirmOrder);
@@ -236,8 +239,9 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
             mUsername =settings.getString("username","");
             mId_number =settings.getString("idNumber","");
             mTruck_no =settings.getString("truckNo","");
-            mToLatitude = -7.2355349; //dummy data
-            mToLongitude = 112.6934332; //dummy data
+            mPortName =settings.getString("portName","");
+            mPortLatitude = Utility.toDouble(settings.getString("portLat",""));
+            mPortLongitude = Utility.toDouble(settings.getString("portLong",""));
             System.out.println("data session = " + mUsername + " " + mId_number +" " + mTruck_no);
         } catch (Exception e) {
             Utility.showErrorDialog(context, "Notification", getString(R.string.error_connection));
@@ -246,7 +250,7 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
 
     private void openMapsLocation() {
         LatLng fromLatLng = new LatLng(mFromLatitude, mFromLongitude);
-        LatLng toLatLng = new LatLng(mToLatitude, mToLongitude);
+        LatLng toLatLng = new LatLng(mPortLatitude, mPortLongitude);
 
         if (fromLatLng == null || toLatLng == null) {
             Toast.makeText(context,"Current location not found please activate GPS",Toast.LENGTH_LONG).show();
@@ -361,14 +365,17 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
                 String service_cd = "";
                 if (Utility.trim(object.get("SERVICE_CD")).equalsIgnoreCase("EXP")) {
                     service_cd = "EXPORT";
+                    mUser_type_from.setText("From");
+                    mUser_type_to.setText("To");
                 } else {
+                    mUser_type_from.setText("To");
+                    mUser_type_to.setText("From");
                     service_cd = "IMPORT";
                 }
                 mJob_type.setText(service_cd);
                 mUser_from.setText(Utility.trim(object.get("CUSTOMER_NAME")));
             }
-            mUser_type_from.setText("Customer");
-            mUser_to.setText("PT. Terminal Petikemas Surabaya");
+            mUser_to.setText(mPortName);
 
             //mapaing data detail
             array_order_list= (JSONArray) returnjson.get("DATA_DETAIL");

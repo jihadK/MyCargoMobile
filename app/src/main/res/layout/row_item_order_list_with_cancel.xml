@@ -34,12 +34,14 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/wrapTop">
                         <TextView
+                            android:textColor="@color/colorPrimaryDark2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:id="@+id/job_number"
                             android:text="-"/>
                         <TextView
+                            android:textColor="@color/colorPrimaryDark2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -60,12 +62,12 @@
                         android:layout_below="@id/wrapTop"
                         android:id="@+id/wrapCenter">
                         <TextView
+                            android:textColor="@color/colorPrimaryDark3"
                             android:id="@+id/ctr_no"
                             android:layout_marginLeft="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24dp"
-                            android:textStyle="bold"
                             android:text="-"/>
                         <RelativeLayout
                             android:layout_below="@id/ctr_no"
@@ -80,6 +82,7 @@
                         android:layout_below="@id/wrapCenter"
                         android:id="@+id/wrapBottom">
                         <TextView
+                            android:textColor="@color/colorPrimaryDark2"
                             android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

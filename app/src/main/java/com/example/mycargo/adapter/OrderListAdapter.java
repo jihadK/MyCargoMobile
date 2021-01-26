@@ -84,7 +84,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         Config.jumlah_slct_vhcl++;
 
         holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")));
-        holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
+        holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) + " | "+Utility.trim(object.get("TYPE_VHE"))+" | "+Utility.trim(object.get("COLOUR_VHE")));
+        //holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
         holder.tVin_no.setText(Utility.trim(object.get("VIN_NUMBER")));
         holder.tStatus.setText(status);
         holder.tDate.setText(Utility.trim(object.get("CREATED_TIME")));
@@ -117,6 +118,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
 
     @Override
     public int getItemCount() {
+        Config.numb_of_list = mData.size();
         return mData.size();
     }
 

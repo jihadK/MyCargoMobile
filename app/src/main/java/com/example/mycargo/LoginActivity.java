@@ -34,6 +34,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
@@ -241,6 +242,24 @@ public class LoginActivity extends AppCompatActivity {
             }
             SharedPreferences settings = getSharedPreferences(Config.SHARED_PREF, 0);
             SharedPreferences.Editor editor = settings.edit();
+
+            if (returnjson.get("data_port") != null) {
+                JSONArray dataPort = (JSONArray) returnjson.get("data_port");
+                for (Object object : dataPort) {
+                    JSONObject obj = (JSONObject) object;
+                    editor.putString("portName",Utility.trim(obj.get("LOC_NAME")));
+                    editor.putString("portLat",Utility.trim(obj.get("LATITUDE")));
+                    editor.putString("portLong",Utility.trim(obj.get("LONGITUDE")));
+
+                    System.out.println("--- port data : " + Utility.trim(obj.get("LOC_NAME")) + " _ "
+                            + Utility.trim(obj.get("LATITUDE")) + " _ " + Utility.trim(obj.get("LONGITUDE")));
+                }
+            } else {
+                editor.putString("portName","");
+                editor.putString("portLat","");
+                editor.putString("portLong","");
+            }
+
             String username=Utility.trim(returnjson.get("name"));
             String idNumber=Utility.trim(mIdNumberView.getText().toString());
             String truckNo=Utility.trim(mTruckNoView.getText().toString());
@@ -250,6 +269,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("password",Utility.trim(objectSet.get("password")));
             editor.putString("oldpassword",Utility.trim(objectSet.get("password")));
             editor.putString("truckNo",truckNo);
+            editor.putString("truckCapacity", Utility.trim(returnjson.get("trk_capacity")));
             editor.commit();
             returnjson.put("oldpassword",Utility.trim(objectSet.get("password")));
             String data=returnjson.toJSONString();

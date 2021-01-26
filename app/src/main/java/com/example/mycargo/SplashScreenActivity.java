@@ -17,6 +17,7 @@ import com.example.mycargo.util.SendAndReceiveJSON;
 import com.example.mycargo.util.Utility;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -115,8 +116,26 @@ public class SplashScreenActivity extends AppCompatActivity {
                 return;
             }
 
+            //CREATE SESSION
             SharedPreferences settings = getSharedPreferences(Config.SHARED_PREF, 0);
             SharedPreferences.Editor editor = settings.edit();
+
+            if (returnjson.get("data_port") != null) {
+                JSONArray dataPort = (JSONArray) returnjson.get("data_port");
+                for (Object object : dataPort) {
+                    JSONObject obj = (JSONObject) object;
+                    editor.putString("portName",Utility.trim(obj.get("LOC_NAME")));
+                    editor.putString("portLat",Utility.trim(obj.get("LATITUDE")));
+                    editor.putString("portLong",Utility.trim(obj.get("LONGITUDE")));
+
+                    System.out.println("--- port data : " + Utility.trim(obj.get("LOC_NAME")) + " _ "
+                            + Utility.trim(obj.get("LATITUDE")) + " _ " + Utility.trim(obj.get("LONGITUDE")));
+                }
+            } else {
+                editor.putString("portName","");
+                editor.putString("portLat","");
+                editor.putString("portLong","");
+            }
 
             String username=Utility.trim(returnjson.get("name"));
             String idNumber=Utility.trim(mId_number);
@@ -126,6 +145,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             editor.putString("idNumber",idNumber);
             editor.putString("password",Utility.trim(mPassword));
             editor.putString("truckNo",truckNo);
+            editor.putString("truckCapacity", Utility.trim(returnjson.get("trk_capacity")));
             editor.commit();
 
             System.out.println("--- turck no : " + truckNo);

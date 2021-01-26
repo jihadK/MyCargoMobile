@@ -15,8 +15,8 @@
         <ImageView
             android:id="@+id/txt_splash"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:src="@drawable/my_cargo2" />
+            android:layout_height="50dp"
+            android:src="@drawable/logo_mytruck" />
     </RelativeLayout>
 
 </RelativeLayout>

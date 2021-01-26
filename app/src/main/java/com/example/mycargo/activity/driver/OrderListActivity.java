@@ -74,10 +74,12 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
     private JSONObject returnJSONDist;
     private JSONObject orpData;
 
+    private int mTruck_capacity;
+    private String mPortName;
     private double mFromLatitude;
     private double mFromLongitude;
-    private double mToLatitude;
-    private double mToLongitude;
+    private double mPortLatitude;
+    private double mPortLongitude;
     private boolean mIsReqBgLocation = false; // if background location is on
 
     //location background variable
@@ -127,7 +129,10 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
         add_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Config.jumlah_actv_vhcl > 0) {
+                System.out.println("--- numb_of_list : " + Config.numb_of_list + " _ " + mTruck_capacity);
+                if (Config.numb_of_list >= mTruck_capacity) {
+                    Utility.showErrorDialog(context, "Notification","Your truck capacity is full");
+                } else if (Config.jumlah_actv_vhcl > 0) {
                     Utility.showErrorDialog(context, "Notification","You have an active order");
                 } else {
                     Intent intent = new Intent(OrderListActivity.this, OrderActivity.class);
@@ -181,7 +186,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
                         btn_direction.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(OrderListActivity.this, "Start Location Background", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(OrderListActivity.this, "Start Location Background", Toast.LENGTH_LONG).show();
                                 //direct to google maps
 
                                 //IF THE DIRECTION AND TURN BY TURN MAP ARE OPENED ON GOOGLE MAPS
@@ -226,7 +231,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
 
     private void openMapsLocation() {
         LatLng fromLatLng = new LatLng(mFromLatitude, mFromLongitude);
-        LatLng toLatLng = new LatLng(mToLatitude, mToLongitude);
+        LatLng toLatLng = new LatLng(mPortLatitude, mPortLongitude);
 
         if (fromLatLng == null || toLatLng == null) {
             Toast.makeText(context,"Current location not found please activate GPS",Toast.LENGTH_LONG).show();
@@ -255,11 +260,13 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
             mUsername =settings.getString("username","");
             mId_number =settings.getString("idNumber","");
             mTruck_no =settings.getString("truckNo","");
+            mTruck_capacity = Utility.toInt(settings.getString("truckCapacity",""));
 
-            mToLatitude = -7.2355349; //dummy data
-            mToLongitude = 112.6934332; //dummy data
+            mPortName = Utility.trim(settings.getString("portName",""));
+            mPortLatitude = Utility.toDouble(settings.getString("portLat",""));
+            mPortLongitude = Utility.toDouble(settings.getString("portLong",""));
 
-            System.out.println("data session = " + mUsername + " " + mId_number +" " + mTruck_no);
+            System.out.println("--- data session = " + mUsername + " " + mId_number +" " + mTruck_no + "  " + mTruck_capacity + " _ " + mPortName + " _ " + mPortLatitude + " _ " + mPortLongitude);
         } catch (Exception e) {
             Utility.showErrorDialog(context, "Notification", getString(R.string.error_connection));
         }
@@ -469,7 +476,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
 
             //openMapsLocation(context, );
 
-            Toast.makeText(mService, data, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mService, data, Toast.LENGTH_SHORT).show();
         }
     }
 
