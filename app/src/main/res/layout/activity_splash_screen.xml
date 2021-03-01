@@ -18,5 +18,15 @@
             android:layout_height="50dp"
             android:src="@drawable/logo_mytruck" />
     </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_apps_version"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/grey"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="v0.0.0"/>
 
 </RelativeLayout>

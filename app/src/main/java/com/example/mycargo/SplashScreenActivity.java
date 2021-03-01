@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.example.mycargo.activity.driver.MainDriverActivity;
 import com.example.mycargo.app.Config;
@@ -34,6 +35,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
+
+        //version
+        TextView appVersion = findViewById(R.id.tv_apps_version);
+        appVersion.setText(getText(R.string.apps_version));
 
         //auto login yn
         SharedPreferences settings = getSharedPreferences(Config.SHARED_PREF, 0);

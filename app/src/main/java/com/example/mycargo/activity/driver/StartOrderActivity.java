@@ -262,7 +262,7 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
             mService.requestLocationUpdates();
         }*/
 
-        openGoogleMapsLocation(context, fromLatLng, toLatLng);
+        openGoogleMapsLocation(context, fromLatLng, toLatLng, Config.first_slct_order_type);
     }
 
     private void getQrCode(){
@@ -488,6 +488,7 @@ public class StartOrderActivity extends AppCompatActivity implements SharedPrefe
             //Remove Flags Vehicle
             Config.jumlah_actv_vhcl =0;
             Config.jumlah_slct_vhcl =0;
+            Config.first_slct_order_type ="";
 
             //Remove background location services
             if (mIsReqBgLocation) {

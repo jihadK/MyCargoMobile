@@ -400,11 +400,13 @@ public class Utility {
         return dimensionInDp;
     }
 
-    public static void openGoogleMapsLocation(Context context,  LatLng fromLatLng, LatLng toLatLng) {
+    public static void openGoogleMapsLocation(Context context,  LatLng fromLatLng, LatLng toLatLng, String service_cd) {
         if (fromLatLng == null || toLatLng == null) {
             Toast.makeText(context,"Current location not found please activate GPS",Toast.LENGTH_LONG).show();
             return;
         }
+        String service_code = service_cd;
+        System.out.println("--- service code : " + service_code);
 
         double dest_lon = toLatLng.longitude;
         double dest_lat = toLatLng.latitude;
@@ -412,11 +414,21 @@ public class Utility {
 //            dest_lat = mDestLocationMarker.getPosition().latitude;
 //            dest_lon = mDestLocationMarker.getPosition().longitude;
 //        }
-        final Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?"
-                        + "saddr=" + fromLatLng.latitude + "," + fromLatLng.longitude
-                        + "&daddr=" + dest_lat + "," + dest_lon));
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        final Intent intent;
+
+        if (service_code.equals("R")) {
+            intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?"
+                            + "saddr=" + fromLatLng.latitude + "," + fromLatLng.longitude
+                            + "&daddr=" + dest_lat + "," + dest_lon));
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        } else {
+            intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?"
+                            + "saddr=" + dest_lat + "," + dest_lon
+                            + "&daddr=" + fromLatLng.latitude + "," + fromLatLng.longitude));
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        }
         context.startActivity(intent);
     }
 }

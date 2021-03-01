@@ -7,4 +7,5 @@
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="error_connection">Can\'t connect to server, Please check your connection</string>
     <string name="navigation_guidance_day" translatable="false">mapbox://styles/mapbox/navigation-guidance-day-v4</string>
+    <string name="apps_version">v2.2.0</string>
 </resources>

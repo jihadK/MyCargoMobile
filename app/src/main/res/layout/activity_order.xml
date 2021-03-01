@@ -29,6 +29,7 @@
             android:textStyle="bold"
             android:textColor="@color/white"/>
     </LinearLayout>
+    <include layout="@layout/component_tab"/>
     <include
         layout="@layout/content_order"
         android:layout_width="match_parent"

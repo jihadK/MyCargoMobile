@@ -2,6 +2,7 @@ package com.example.mycargo.activity.driver;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,11 +24,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mycargo.R;
+import com.example.mycargo.adapter.ViewPagerAdapter;
 import com.example.mycargo.app.Config;
 import com.example.mycargo.dialog.OrderDetailDialog;
+import com.example.mycargo.fragment.DelivaryListFragment;
+import com.example.mycargo.fragment.ReceivingListFragment;
 import com.example.mycargo.util.CallWS;
 import com.example.mycargo.util.SendAndReceiveJSON;
 import com.example.mycargo.util.Utility;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -55,11 +60,27 @@ public class OrderActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
 
+    //TAB LAYOUT SECTION
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_order);
+
+        //TAB LAYOUT SECTION
+        mTabLayout = findViewById(R.id.tv_tab);
+        mViewPager = findViewById(R.id.tv_viewPager_tab);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.AddFragment(new ReceivingListFragment(),"Receiving");
+        viewPagerAdapter.AddFragment(new DelivaryListFragment(),"Delivery");
+
+        mViewPager.setAdapter(viewPagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        //END TAYOUT SECTION
 
         mWrap_content = findViewById(R.id.tv_wrap_content);
         mIl_no_data = findViewById(R.id.tv_wrap_noData);
@@ -96,6 +117,7 @@ public class OrderActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("TYPE", "A");
+            jsonObject.put("SERVICE_TYPE", "R");
             jsonObject.put("DRV_ID", id_number);
             OrderTask task=new OrderTask(username,"D", jsonObject);
             task.execute();

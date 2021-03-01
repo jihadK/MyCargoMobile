@@ -81,6 +81,12 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
             status = "WAITING";
         }
 
+        //MAPING VARIABLE CONFIG GLOBAL
+        if (Utility.trim(object.get("ORDER_TYPE")).equals("EXP")) {
+            Config.first_slct_order_type = "R";
+        } else {
+            Config.first_slct_order_type = "D";
+        }
         Config.jumlah_slct_vhcl++;
 
         holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")));
@@ -108,6 +114,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
                 Intent intent = new Intent(context, DetailOrderActivity.class);
                 intent.putExtra("vin_no", Utility.trim(object.get("VIN_NUMBER")));
                 intent.putExtra("show_button", "N");
+                intent.putExtra("service_type", Config.first_slct_order_type);
                 context.startActivity(intent);
             }
         });
@@ -119,6 +126,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     @Override
     public int getItemCount() {
         Config.numb_of_list = mData.size();
+        if ( mData.size() < 1) {
+            Config.first_slct_order_type = "";
+        }
         return mData.size();
     }
 

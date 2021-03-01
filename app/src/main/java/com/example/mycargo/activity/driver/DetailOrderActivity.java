@@ -56,6 +56,7 @@ public class DetailOrderActivity extends AppCompatActivity {
     private String mId_number;
     private String mTruckNo;
     private String show_button;
+    private String mService_type;
 
     private FragmentManager fm = getSupportFragmentManager();
 
@@ -139,9 +140,16 @@ public class DetailOrderActivity extends AppCompatActivity {
             //data from intent
             mVin_no = getIntent().getSerializableExtra("vin_no").toString();
             show_button = getIntent().getSerializableExtra("show_button").toString();
+            mService_type = getIntent().getSerializableExtra("service_type").toString();
+
+            System.out.println("--- service_type : " + mService_type + " _ " +  Config.first_slct_order_type);
 
             if (show_button.equals("Y")) {
-                btn_add_car.setVisibility(View.VISIBLE);
+                if (Config.first_slct_order_type.equals(mService_type) || Config.first_slct_order_type.equals("")) {
+                    btn_add_car.setVisibility(View.VISIBLE);
+                } else {
+                    btn_add_car.setVisibility(View.GONE);
+                }
             } else {
                 btn_add_car.setVisibility(View.GONE);
             }
@@ -162,6 +170,7 @@ public class DetailOrderActivity extends AppCompatActivity {
                 obj.put("MODE", "S");
             }
             obj.put("TYPE", "D");
+            obj.put("SERVICE_TYPE", Utility.trim(mService_type));
             obj.put("VIN_NO", Utility.trim(mVin_no));
             obj.put("DRV_ID", Utility.trim(mId_number));
 

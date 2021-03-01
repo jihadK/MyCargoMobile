@@ -190,7 +190,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
                                 //direct to google maps
 
                                 //IF THE DIRECTION AND TURN BY TURN MAP ARE OPENED ON GOOGLE MAPS
-                                if (Config.jumlah_slct_vhcl == 0) {
+                                if (Config.jumlah_slct_vhcl < 1) {
                                     Utility.showErrorDialog(context, "Notification","Add vehicle first");
                                 } else {
                                     openMapsLocation();
@@ -238,7 +238,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
             return;
         }
 
-        openGoogleMapsLocation(context, fromLatLng, toLatLng);
+        openGoogleMapsLocation(context, fromLatLng, toLatLng, Config.first_slct_order_type);
     }
 
     private void startAssignment(){
@@ -277,6 +277,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("MODE", "S");
             jsonObject.put("TYPE", "A");
+            jsonObject.put("SERVICE_TYPE", "A");
             jsonObject.put("DRV_ID", mId_number);
             OrderTask task=new OrderTask(mUsername,"D", jsonObject);
             task.execute();
@@ -319,6 +320,7 @@ public class OrderListActivity extends AppCompatActivity implements SharedPrefer
 
             if(returnjson==null || !returnjson.get("RESCD").equals("00"))
             {
+                Config.first_slct_order_type ="";
                 mIl_no_data.setVisibility(View.VISIBLE);
                 Toast.makeText(context, returnjson.get("RESMSG").toString(),
                         Toast.LENGTH_LONG).show();

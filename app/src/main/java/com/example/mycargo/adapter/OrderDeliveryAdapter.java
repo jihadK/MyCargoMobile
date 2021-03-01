@@ -14,18 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycargo.R;
 import com.example.mycargo.activity.driver.DetailOrderActivity;
-import com.example.mycargo.app.Config;
 import com.example.mycargo.util.Utility;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.ViewHolder> {
-    private static final String TAG = "StartOrderAdapter";
-    JSONArray mData;
-    String mFirst_slct_order_type = "";
+public class OrderDeliveryAdapter extends RecyclerView.Adapter<OrderDeliveryAdapter.ViewHolder> {
 
-    public StartOrderAdapter (JSONArray data){
+    JSONArray mData;
+
+    public OrderDeliveryAdapter (JSONArray data){
         this.mData = data;
     }
 
@@ -33,7 +31,7 @@ public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_item_order_list, parent, false);
+        View view = layoutInflater.inflate(R.layout.content_order_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -43,6 +41,8 @@ public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.Vi
         JSONObject object = (JSONObject) mData.get(position);
         Context context = holder.tWrap_status.getContext();
         String status = "";
+
+        //count active vehicle; STATUS = S;
 
         //maping data
         if (object.get("STATUS").equals("Y")) {
@@ -65,12 +65,6 @@ public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.Vi
             status = "WAITING";
         }
 
-        if (Utility.trim(object.get("ORDER_TYPE")).equals("EXP")) {
-            mFirst_slct_order_type = "R";
-        } else {
-            mFirst_slct_order_type = "D";
-        }
-
         holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")));
         holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) + " | "+Utility.trim(object.get("TYPE_VHE"))+" | "+Utility.trim(object.get("COLOUR_VHE")));
         //holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
@@ -83,23 +77,19 @@ public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.Vi
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailOrderActivity.class);
                 intent.putExtra("vin_no", Utility.trim(object.get("VIN_NUMBER")));
-                intent.putExtra("show_button", "N");
-                intent.putExtra("service_type", mFirst_slct_order_type);
+                intent.putExtra("show_button", "Y");
+                intent.putExtra("service_type", "D");
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        if (mData.size() < 1) {
-            mFirst_slct_order_type ="";
-        }
         return mData.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tDate;
         TextView tOrder_no;
@@ -119,7 +109,6 @@ public class StartOrderAdapter extends RecyclerView.Adapter<StartOrderAdapter.Vi
             tStatus = itemView.findViewById(R.id.status);
             tWrap_status = itemView.findViewById(R.id.wrap_status);
             tWrap_content = itemView.findViewById(R.id.tv_wrap_content);
-
         }
     }
 }

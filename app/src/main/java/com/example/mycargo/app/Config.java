@@ -27,6 +27,7 @@ public class Config {
     public static int jumlah_actv_vhcl = 0;
     public static int jumlah_slct_vhcl = 0;
     public static int numb_of_list = 0;
+    public static String first_slct_order_type = "";
 
     public static ArrayList<String> mapCtrKey = new ArrayList<String>();
     public static ArrayList<String> mapCtrNo = new ArrayList<String>();

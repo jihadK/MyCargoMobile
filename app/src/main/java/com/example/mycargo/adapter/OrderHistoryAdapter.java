@@ -67,7 +67,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
         System.out.println("---- finish time : " +  Utility.trim(object.get("FINISH_TIME")));
 
-        holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")));
+        holder.tOrder_no.setText(Utility.trim(object.get("JOB_NO")) + " - " + Utility.trim(object.get("ORDER_TYPE")));
         holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) + " | "+Utility.trim(object.get("TYPE_VHE"))+" | "+Utility.trim(object.get("COLOUR_VHE")));
         //holder.tOrder_det.setText(Utility.trim(object.get("MERK_VHE")) +"-"+Utility.trim(object.get("JENIS_VHE"))+"-"+Utility.trim(object.get("COLOUR_VHE"))+"-"+Utility.trim(object.get("TYPE_VHE")));
         holder.tCtr_no.setText(Utility.trim(object.get("VIN_NUMBER")));
